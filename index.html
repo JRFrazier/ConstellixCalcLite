@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container"> 
+    <h1>Constellix Calc</h1>
+
+    <!-- DNS SLIDER -->
+    <div class="slidecontainer">
+      <p>Domains:</p>
+      <div class="slideAndValue">
+      <input onchange="valueChange()" type="range" min="1" max="100" value="0" class="slider" id="dnsInput"> 
+      <div class="calcValue">
+      <span id="dnsValue"></span>
+      </div>
+      </div>
+     </div>
+
+     <!-- HTTP SLIDER -->
+    <div class="slidecontainer">
+      <p>HTTP Check:</p>
+      <div class="slideAndValue">
+      <input onchange="valueChange()" type="range" min="1" max="100" value="0" class="slider" id="httpInput"> 
+      <span id="httpValue"></span>
+      </div>
+     </div> 
+
+     <!-- HTTPS SLIDER -->
+    <div class="slidecontainer">
+      <p>HTPTS Check:</p>
+      <div class="slideAndValue">
+      <input onchange="valueChange()" type="range" min="1" max="100" value="0" class="slider" id="httpsInput"> 
+      <span id="httpsValue"></span>
+      </div>
+     </div>
+    </div>
+     <script src="calc.js"></script>
+     </body> 
+</html>
