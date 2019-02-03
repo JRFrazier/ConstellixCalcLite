@@ -1,45 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!--Stops Google Translate Popup-->
+    <meta name="google" content="notranslate" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
     <title>Document</title>
-</head>
-<body>
-    <div class="container"> 
-    <h1>Constellix Calc</h1>
+  </head>
+  <body>
+    <div onload="valueChange()" class="calcAppContainer">
+      <div class="calcContainer">
+        <h1>Constellix Calc</h1>
 
-    <!-- DNS SLIDER -->
-    <div class="slidecontainer">
-      <p>Domains:</p>
-      <div class="slideAndValue">
-      <input onchange="valueChange()" type="range" min="1" max="100" value="0" class="slider" id="dnsInput"> 
-      <div class="calcValue">
-      <span id="dnsValue"></span>
-      </div>
-      </div>
-     </div>
+        <!-- Total -->
+        <h1>Total: <span id="calcTotal">$0</span></h1>
+        <!-- DNS SLIDER -->
+        <div class="dnsSlideContainer">
+          <p>Domains:<span id="dnsCost"></span></p>
+          <div class="slideAndValue">
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="0"
+              class="slider"
+              id="dnsInput"
+            />
+            <div class="calcValue">
+              <span id="dnsValue"></span>
+            </div>
+          </div>
+        </div>
 
-     <!-- HTTP SLIDER -->
-    <div class="slidecontainer">
-      <p>HTTP Check:</p>
-      <div class="slideAndValue">
-      <input onchange="valueChange()" type="range" min="1" max="100" value="0" class="slider" id="httpInput"> 
-      <span id="httpValue"></span>
-      </div>
-     </div> 
+        <!-- HTTP SLIDER -->
+        <div class="sonarSlideContainer">
+          <p>HTTP Check:<span id="httpCost"></span></p>
+          <div class="slideButtonGroup">
+            <div class="slideAndValue">
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="0"
+                class="slider"
+                id="httpInput"
+              />
+              <span id="httpValue"></span>
+            </div>
+            <form class="radioButtonGroup">
+              <label>Check Interval:</label>
+              <label class="radio-inline">
+                <input
+                  onchange="httpIntervalChange(86400)"
+                  type="radio"
+                  name="optradio"
+                  checked
+                />30 sec
+              </label>
+              <label class="radio-inline">
+                <input
+                  onchange="httpIntervalChange(43200)"
+                  type="radio"
+                  name="optradio"
+                />1 min
+              </label>
+              <label class="radio-inline">
+                <input
+                  onchange="httpIntervalChange(21600)"
+                  type="radio"
+                  name="optradio"
+                />2 min
+              </label>
+              <label class="radio-inline">
+                <input
+                  onchange="httpIntervalChange(14400)"
+                  type="radio"
+                  name="optradio"
+                />3 min
+              </label>
+              <label class="radio-inline">
+                <input
+                  onchange="httpIntervalChange(10800)"
+                  type="radio"
+                  name="optradio"
+                />4 min
+              </label>
+              <label class="radio-inline">
+                <input
+                  onchange="httpIntervalChange(8640)"
+                  type="radio"
+                  name="optradio"
+                />5 min
+              </label>
+            </form>
+            <form class="radioButtonGroup">
+              <label>Check Region:</label>
+              <label class="radio-inline">
+                <input
+                  onchange="setHttpRegionValue(1)"
+                  type="radio"
+                  name="optradio"
+                  checked
+                />North America / Europe
+              </label>
+              <label class="radio-inline">
+                <input
+                  onchange="setHttpRegionValue(2)"
+                  type="radio"
+                  name="optradio"
+                />Asia-Pacific / Oceania
+              </label>
+            </form>
+          </div>
+        </div>
 
-     <!-- HTTPS SLIDER -->
-    <div class="slidecontainer">
-      <p>HTPTS Check:</p>
-      <div class="slideAndValue">
-      <input onchange="valueChange()" type="range" min="1" max="100" value="0" class="slider" id="httpsInput"> 
-      <span id="httpsValue"></span>
+        <!-- HTTPS SLIDER -->
+        <div class="sonarSlideContainer">
+          <p>HTPTS Check:<span id="httpsCost"></span></p>
+          <div class="slideButtonGroup">
+            <div class="slideAndValue">
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="0"
+                class="slider"
+                id="httpsInput"
+              />
+              <span id="httpsValue"></span>
+            </div>
+            <form class="radioButtonGroup">
+              <label>Check Interval:</label>
+              <label class="radio-inline">
+                <input
+                  onchange="httpsIntervalChange(86400)"
+                  id="rs1"
+                  value="30"
+                  type="radio"
+                  name="optradio"
+                  onchange="myFunc()"
+                  checked
+                />30 sec
+              </label>
+              <label class="radio-inline">
+                <input
+                  onchange="httpsIntervalChange(43200)"
+                  id="rs2"
+                  value="1"
+                  type="radio"
+                  name="optradio"
+                />1 min
+              </label>
+              <label class="radio-inline">
+                <input
+                  onchange="httpsIntervalChange(21600)"
+                  id="rs3"
+                  value="2"
+                  type="radio"
+                  name="optradio"
+                />2 min
+              </label>
+              <label class="radio-inline">
+                <input
+                  onchange="httpsIntervalChange(14400)"
+                  id="rs4"
+                  value="3"
+                  type="radio"
+                  name="optradio"
+                />3 min
+              </label>
+              <label class="radio-inline">
+                <input
+                  onchange="httpsIntervalChange(10800)"
+                  id="rs5"
+                  value="4"
+                  type="radio"
+                  name="optradio"
+                />4 min
+              </label>
+              <label class="radio-inline">
+                <input
+                  onchange="httpsIntervalChange(8640)"
+                  id="rs6"
+                  value="5"
+                  type="radio"
+                  name="optradio"
+                />5 min
+              </label>
+            </form>
+            <form class="radioButtonGroup">
+              <label>Check Region:</label>
+              <label class="radio-inline">
+                <input
+                  onchange="setHttpsRegionValue(1)"
+                  type="radio"
+                  name="optradio"
+                  checked
+                />North America / Europe
+              </label>
+              <label class="radio-inline">
+                <input
+                  onchange="setHttpsRegionValue(2)"
+                  type="radio"
+                  name="optradio"
+                />Asia-Pacific
+              </label>
+              <label class="radio-inline">
+                <input
+                  onchange="setHttpsRegionValue(3)"
+                  type="radio"
+                  name="optradio"
+                />Oceania
+              </label>
+            </form>
+          </div>
+        </div>
       </div>
-     </div>
     </div>
-     <script src="calc.js"></script>
-     </body> 
+    <script src="calc.js"></script>
+  </body>
 </html>

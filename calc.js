@@ -1,24 +1,153 @@
-//DNS Slider
-var dnsSlider = document.getElementById("dnsInput");
-var dnsOutput = document.getElementById("dnsValue");
+//DNS Slider Variables🔥
+const dnsSlider = document.getElementById("dnsInput");
+const dnsOutput = document.getElementById("dnsValue");
+const dnsCost = document.getElementById("dnsCost");
+//HTTP Slider Variables🔥
+const httpSlider = document.getElementById("httpInput");
+const httpOutput = document.getElementById("httpValue");
+const httpCost = document.getElementById("httpCost");
+//HTTPS Slider Variables🔥
+const httpsSlider = document.getElementById("httpsInput");
+const httpsOutput = document.getElementById("httpsValue");
+const httpsCost = document.getElementById("httpsCost");
+//Totals
+let dnsTotal = 0;
+let httpTotal = 0;
+let httpsTotal = 0;
+//Total
+const calcTotal = document.getElementById("calcTotal");
+
+//Loads initial value of $0 for all 3 sliders when window first loads 💪
+window.onload = function() {
+  dnsCost.innerHTML = "$0";
+  httpCost.innerHTML = "$0";
+  httpsCost.innerHTML = "$0";
+};
+
+//DNS Slide
 dnsOutput.innerHTML = dnsSlider.value;
 
 dnsSlider.oninput = function() {
   dnsOutput.innerHTML = this.value;
-}
+
+  if (this.value == 1) {
+    dnsCost.innerHTML = `$${this.value * 5}`;
+    dnsTotal = this.value * 5;
+  } else if (this.value > 1 && this.value < 26) {
+    dnsCost.innerHTML = `$${((this.value - 1) * 0.5 + 5).toFixed(2)}`;
+    dnsTotal = (this.value - 1) * 0.5 + 5;
+  } else if (this.value > 25) {
+    dnsCost.innerHTML = `$${((this.value - 25) * 0.095 + 17).toFixed(2)}`;
+    dnsTotal = (this.value - 25) * 0.095 + 17;
+  } else {
+    dnsCost.innerHTML = "$0";
+    dnsTotal = 0;
+  }
+  updateTotal(dnsTotal + httpTotal + httpsTotal);
+};
+
 //Sonar HTTP Slider
-var httpSlider = document.getElementById("httpInput");
-var httpOutput = document.getElementById("httpValue");
 httpOutput.innerHTML = httpSlider.value;
+let httpInterval = 86400;
+let httpRegionValue = 0.0002;
+let httpCheckNumber = 0;
 
 httpSlider.oninput = function() {
   httpOutput.innerHTML = this.value;
+  httpCheckNumber = this.value;
+
+  httpCost.innerHTML = `$${(
+    httpCheckNumber *
+    httpRegionValue *
+    httpInterval
+  ).toFixed(2)}`;
+
+  httpTotal = httpCheckNumber * httpRegionValue * httpInterval;
+  updateTotal(dnsTotal + httpTotal + httpsTotal);
+};
+
+function httpIntervalChange(number) {
+  httpInterval = number;
+
+  httpCost.innerHTML = `$${(httpCheckNumber * httpRegionValue * number).toFixed(
+    2
+  )}`;
+
+  httpTotal = httpCheckNumber * httpRegionValue * number;
+  updateTotal(dnsTotal + httpTotal + httpsTotal);
 }
+
+function setHttpRegionValue(region) {
+  if (region === 2) {
+    httpRegionValue = 0.0003;
+  } else {
+    httpRegionValue = 0.0002;
+  }
+
+  httpCost.innerHTML = `$${(
+    httpCheckNumber *
+    httpRegionValue *
+    httpInterval
+  ).toFixed(2)}`;
+
+  httpTotal = httpCheckNumber * httpRegionValue * httpInterval;
+  updateTotal(dnsTotal + httpTotal + httpsTotal);
+}
+
 //Sonar HTTPS Slider
-var httpsSlider = document.getElementById("httpsInput");
-var httpsOutput = document.getElementById("httpsValue");
+let httpsInterval = 86400;
+let httpsRegionValue = 0.0003;
+let httpsCheckNumber = 0;
+
 httpsOutput.innerHTML = httpsSlider.value;
 
 httpsSlider.oninput = function() {
   httpsOutput.innerHTML = this.value;
+  httpsCheckNumber = this.value;
+
+  httpsCost.innerHTML = `$${(
+    httpsCheckNumber *
+    httpsRegionValue *
+    httpsInterval
+  ).toFixed(2)}`;
+
+  httpsTotal = httpsCheckNumber * httpsRegionValue * httpsInterval;
+  updateTotal(dnsTotal + httpTotal + httpsTotal);
+};
+
+function httpsIntervalChange(number) {
+  httpsInterval = number;
+
+  httpsCost.innerHTML = `$${(
+    httpsCheckNumber *
+    httpsRegionValue *
+    number
+  ).toFixed(2)}`;
+
+  httpsTotal = httpsCheckNumber * httpsRegionValue * number;
+  updateTotal(dnsTotal + httpTotal + httpsTotal);
+}
+
+function setHttpsRegionValue(region) {
+  if (region === 2) {
+    httpsRegionValue = 0.0004;
+  } else if (region === 3) {
+    httpsRegionValue = 0.0005;
+  } else {
+    httpsRegionValue = 0.0003;
+  }
+
+  httpsCost.innerHTML = `$${(
+    httpsCheckNumber *
+    httpsRegionValue *
+    httpsInterval
+  ).toFixed(2)}`;
+
+  httpsTotal = httpsCheckNumber * httpsRegionValue * httpsInterval;
+  updateTotal(dnsTotal + httpTotal + httpsTotal);
+}
+
+// Total
+function updateTotal(number) {
+  calcTotal.innerHTML = `$${parseFloat(number).toFixed(2)}`;
 }
