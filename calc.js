@@ -68,7 +68,7 @@ querySlider.oninput = function() {
 //Sonar HTTP Slider
 httpOutput.innerHTML = httpSlider.value;
 let httpInterval = 86400;
-let httpRegionValue = 0.0002;
+let httpRegionValue = 0.00004;
 let httpCheckNumber = 0;
 
 httpSlider.oninput = function() {
@@ -98,9 +98,9 @@ function httpIntervalChange(number) {
 
 function setHttpRegionValue(region) {
   if (region === 2) {
-    httpRegionValue = 0.0003;
+    httpRegionValue = 0.00006;
   } else {
-    httpRegionValue = 0.0002;
+    httpRegionValue = 0.00004;
   }
 
   httpCost.innerHTML = `$${(
@@ -115,7 +115,7 @@ function setHttpRegionValue(region) {
 
 //Sonar HTTPS Slider
 let httpsInterval = 86400;
-let httpsRegionValue = 0.0003;
+let httpsRegionValue = 0.00006;
 let httpsCheckNumber = 0;
 
 httpsOutput.innerHTML = httpsSlider.value;
@@ -149,11 +149,11 @@ function httpsIntervalChange(number) {
 
 function setHttpsRegionValue(region) {
   if (region === 2) {
-    httpsRegionValue = 0.0004;
+    httpsRegionValue = 0.00008;
   } else if (region === 3) {
-    httpsRegionValue = 0.0005;
+    httpsRegionValue = 0.0001;
   } else {
-    httpsRegionValue = 0.0003;
+    httpsRegionValue = 0.00006;
   }
 
   httpsCost.innerHTML = `$${(
