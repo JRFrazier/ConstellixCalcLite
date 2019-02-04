@@ -18,6 +18,7 @@
         <h1>Total: <span id="calcTotal">$0</span></h1>
         <!-- DNS SLIDER -->
         <div class="dnsSlideContainer">
+          <div>
           <p>Domains:<span id="dnsCost"></span></p>
           <div class="slideAndValue">
             <input
@@ -32,8 +33,25 @@
               <span id="dnsValue"></span>
             </div>
           </div>
+          </div>
+        <!--Query Slider  --> 
+        <div>
+          <p>Standard Querys (In Millions):<span id="queryCost"></span></p>
+          <div class="slideAndValue">
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="0"
+              class="slider"
+              id="queryInput"
+            />
+            <div class="calcValue">
+              <span id="queryValue"></span>
+            </div>
+          </div>
         </div>
-
+        </div>
         <!-- HTTP SLIDER -->
         <div class="sonarSlideContainer">
           <p>HTTP Check:<span id="httpCost"></span></p>

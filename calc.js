@@ -2,6 +2,10 @@
 const dnsSlider = document.getElementById("dnsInput");
 const dnsOutput = document.getElementById("dnsValue");
 const dnsCost = document.getElementById("dnsCost");
+//Query Slider Variables🔥 
+const querySlider = document.getElementById("queryInput");
+const queryOutput = document.getElementById("queryValue");
+const queryCost = document.getElementById("queryCost");
 //HTTP Slider Variables🔥
 const httpSlider = document.getElementById("httpInput");
 const httpOutput = document.getElementById("httpValue");
@@ -12,6 +16,7 @@ const httpsOutput = document.getElementById("httpsValue");
 const httpsCost = document.getElementById("httpsCost");
 //Totals
 let dnsTotal = 0;
+let queryTotal = 0;
 let httpTotal = 0;
 let httpsTotal = 0;
 //Total
@@ -20,6 +25,7 @@ const calcTotal = document.getElementById("calcTotal");
 //Loads initial value of $0 for all 3 sliders when window first loads 💪
 window.onload = function() {
   dnsCost.innerHTML = "$0";
+  queryCost.innerHTML = "$0";
   httpCost.innerHTML = "$0";
   httpsCost.innerHTML = "$0";
 };
@@ -43,8 +49,21 @@ dnsSlider.oninput = function() {
     dnsCost.innerHTML = "$0";
     dnsTotal = 0;
   }
-  updateTotal(dnsTotal + httpTotal + httpsTotal);
+  updateTotal(dnsTotal + queryTotal + httpTotal + httpsTotal);
 };
+
+//Query Slider
+queryOutput.innerHTML = querySlider.value;
+
+querySlider.oninput = function() {
+  queryOutput.innerHTML = this.value
+
+  queryCost.innerHTML = `$${(this.value * 0.39).toFixed(2)}`
+
+  queryTotal = this.value * 0.39;
+
+  updateTotal(dnsTotal + queryTotal + httpTotal + httpsTotal)
+}
 
 //Sonar HTTP Slider
 httpOutput.innerHTML = httpSlider.value;
@@ -63,7 +82,7 @@ httpSlider.oninput = function() {
   ).toFixed(2)}`;
 
   httpTotal = httpCheckNumber * httpRegionValue * httpInterval;
-  updateTotal(dnsTotal + httpTotal + httpsTotal);
+  updateTotal(dnsTotal + queryTotal + httpTotal + httpsTotal);
 };
 
 function httpIntervalChange(number) {
@@ -74,7 +93,7 @@ function httpIntervalChange(number) {
   )}`;
 
   httpTotal = httpCheckNumber * httpRegionValue * number;
-  updateTotal(dnsTotal + httpTotal + httpsTotal);
+  updateTotal(dnsTotal + queryTotal + httpTotal + httpsTotal);
 }
 
 function setHttpRegionValue(region) {
@@ -91,7 +110,7 @@ function setHttpRegionValue(region) {
   ).toFixed(2)}`;
 
   httpTotal = httpCheckNumber * httpRegionValue * httpInterval;
-  updateTotal(dnsTotal + httpTotal + httpsTotal);
+  updateTotal(dnsTotal + queryTotal + httpTotal + httpsTotal);
 }
 
 //Sonar HTTPS Slider
@@ -112,7 +131,7 @@ httpsSlider.oninput = function() {
   ).toFixed(2)}`;
 
   httpsTotal = httpsCheckNumber * httpsRegionValue * httpsInterval;
-  updateTotal(dnsTotal + httpTotal + httpsTotal);
+  updateTotal(dnsTotal + queryTotal + httpTotal + httpsTotal);
 };
 
 function httpsIntervalChange(number) {
@@ -125,7 +144,7 @@ function httpsIntervalChange(number) {
   ).toFixed(2)}`;
 
   httpsTotal = httpsCheckNumber * httpsRegionValue * number;
-  updateTotal(dnsTotal + httpTotal + httpsTotal);
+  updateTotal(dnsTotal + queryTotal + httpTotal + httpsTotal);
 }
 
 function setHttpsRegionValue(region) {
@@ -144,7 +163,7 @@ function setHttpsRegionValue(region) {
   ).toFixed(2)}`;
 
   httpsTotal = httpsCheckNumber * httpsRegionValue * httpsInterval;
-  updateTotal(dnsTotal + httpTotal + httpsTotal);
+  updateTotal(dnsTotal + queryTotal + httpTotal + httpsTotal);
 }
 
 // Total
