@@ -15,19 +15,19 @@ const httpsSlider = document.getElementById("httpsInput");
 const httpsOutput = document.getElementById("httpsValue");
 const httpsCost = document.getElementById("httpsCost");
 //Totals
-let dnsTotal = 0;
-let queryTotal = 0;
-let httpTotal = 0;
-let httpsTotal = 0;
+let dnsTotal = 0.00;
+let queryTotal = 0.00;
+let httpTotal = 0.00;
+let httpsTotal = 0.00;
 //Total
 const calcTotal = document.getElementById("calcTotal");
 
 //Loads initial value of $0 for all 3 sliders when window first loads 💪
 window.onload = function() {
-  dnsCost.innerHTML = "$0";
-  queryCost.innerHTML = "$0";
-  httpCost.innerHTML = "$0";
-  httpsCost.innerHTML = "$0";
+  dnsCost.innerHTML = "$0.00";
+  queryCost.innerHTML = "$0.00";
+  httpCost.innerHTML = "$0.00";
+  httpsCost.innerHTML = "$0.00";
 };
 
 //DNS Slide
@@ -46,8 +46,8 @@ dnsSlider.oninput = function() {
     dnsCost.innerHTML = `$${((this.value - 25) * 0.095 + 17).toFixed(2)}`;
     dnsTotal = (this.value - 25) * 0.095 + 17;
   } else {
-    dnsCost.innerHTML = "$0";
-    dnsTotal = 0;
+    dnsCost.innerHTML = "$0.00";
+    dnsTotal = 0.00;
   }
   updateTotal(dnsTotal + queryTotal + httpTotal + httpsTotal);
 };
@@ -69,7 +69,7 @@ querySlider.oninput = function() {
 httpOutput.innerHTML = httpSlider.value;
 let httpInterval = 86400;
 let httpRegionValue = 0.00004;
-let httpCheckNumber = 0;
+let httpCheckNumber = 0.00;
 
 httpSlider.oninput = function() {
   httpOutput.innerHTML = this.value;
@@ -116,7 +116,7 @@ function setHttpRegionValue(region) {
 //Sonar HTTPS Slider
 let httpsInterval = 86400;
 let httpsRegionValue = 0.00006;
-let httpsCheckNumber = 0;
+let httpsCheckNumber = 0.00;
 
 httpsOutput.innerHTML = httpsSlider.value;
 
